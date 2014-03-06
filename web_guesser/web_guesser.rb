@@ -4,7 +4,7 @@ set :bind, '0.0.0.0'
 set :port, '3000'
 
 num_secret = rand(101)
-
+@@guesses = 5
 
 #---------HELPER METHODS
 def compare(int1, int2)
@@ -25,12 +25,26 @@ def compare(int1, int2)
 	end
 end
 
+def reset
+	@@guesses = 5
+	num_secret = rand(101)
+end
+
 #---------REQUEST HANDLING
 get '/' do
 	"Hello, World!"
 end
 
 get '/guesser' do
-	compare_nums = !params['guess'].nil? ? compare(params['guess'].to_i, num_secret) : nil 
-	erb :index, :locals => { :number => num_secret, :compared => compare_nums }
+	reset() if !params['reset'].nil?
+	b_cheat = true if !params['cheat'].nil?
+	if !params['guess'].nil?
+		compare_nums = compare(params['guess'].to_i, num_secret)
+		@@guesses -= 1
+	else
+		@@guesses = 5
+		compare_nums = nil
+	end
+		 
+	erb :index, :locals => { :number => num_secret, :compared => compare_nums, :guesses => @@guesses, :cheat => b_cheat }
 end
