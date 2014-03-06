@@ -10,5 +10,6 @@ get '/' do
 end
 
 get '/guesser' do
-	"The secret number is #{num_secret}!"
+	# "The secret number is #{num_secret}!"
+	erb :index, :locals => { :number => num_secret }
 end
