@@ -1,6 +1,24 @@
 <html>
 <head></head>
 <body>
-	<p>The secret number is <%= number %>!</p>
+	<form>
+		<input type='test' name='guess' />
+		<input type='submit' value='Guess!' />
+	</form>
+
+	<% if compared == -2 %>
+		<p>Your guess was WAY too low!</p>
+	<% elsif compared == -1 %>
+		<p>Your guess was a little low.</p>
+	<% elsif compared == 1 %>
+		<p>Your guess was a little high.</p>
+	<% elsif compared == 2 %>
+		<p>Your guess was WAY too high!</p>
+	<% elsif compared == 0 %>
+		<p>YOU GOT IT RIGHT! WOOHOO!</p>
+		<p>The secret number is: <%= number %>!</p>
+	<% elsif compared.nil? %>
+		<p>Type a number, dummy!</p>
+	<% end %>
 </body>
 </html>
