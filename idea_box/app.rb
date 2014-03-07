@@ -1,6 +1,3 @@
-require 'bundler'
-Bundler.require
-
 class IdeaBoxApp < Sinatra::Base
 # Sinatra settings for Nitrous.IO
   set :bind, '0.0.0.0'
@@ -10,7 +7,8 @@ class IdeaBoxApp < Sinatra::Base
 
 #------------------------- ROUTING
   get '/' do 
-    "Hello, world!"
+   #  "Hello, world!"
+   erb :index
   end
 
   run! if app_file == $0
