@@ -1,7 +1,22 @@
 <html>
-<head></head>  
+<head><title>IdeaBox</title></head>  
 <body>
   <h1> Welcome to Idea Box! </h1>
-  <blockquote>Fuck Bitches, Get Money <cite>--Thomas Jefferson</cite></blockquote>
+  <form action='/' method='POST'>
+  <p>Your Idea:</p>
+  <input type='text' name='idea_title' /><br />
+  <textarea name='idea_description'></textarea><br/>
+  <input type='submit' />
+  </form>
+  <br />
+  <h3>Existing Ideas:</h3>
+  <ul>
+    <% ideas.each do |idea| %>
+      <li>
+        <%= idea.title %><br/>
+        <%= idea.description %>
+     </li>
+    <% end %>
+  </ul>
 </body>
 </html>
