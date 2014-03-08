@@ -1,10 +1,8 @@
 ---
 ideas:
-- :title: my_idea
-  :description: lookit!
 - :title: Idea One
   :description: Build a Sinatra app with a yaml backend!
 - :title: Idea two
   :description: Check my yaml backend to make sure it's working!
 - :title: Idea 3
-  :description: an I list new ideas too?
+  :description: Can I list new ideas too?

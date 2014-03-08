@@ -20,6 +20,20 @@ class IdeaBoxApp < Sinatra::Base
     redirect '/'
   end
 
+	put '/:id' do |id|
+		data = { 
+			:title => params['idea_title'],
+			:description => params['idea_description']
+		}
+		Idea.update(id.to_i, data)
+		redirect '/'
+	end
+	
+	get '/:id/edit' do |id|
+		idea = Idea.find(id.to_i)
+		erb :edit, locals: {id: id, idea: idea}
+	end
+	
 	delete '/:id' do |id|
 		Idea.delete(id)
 		# 2. Check for duplicate entries?
