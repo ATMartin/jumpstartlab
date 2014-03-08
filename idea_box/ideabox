@@ -1,8 +1,10 @@
 ---
 ideas:
-- :title: Idea One
-  :description: Build a Sinatra app with a yaml backend!
-- :title: Idea two
-  :description: Check my yaml backend to make sure it's working!
-- :title: Idea 3
-  :description: Can I list new ideas too?
+- title: Test 1
+  description: TEST IDEA - NOW WITH EXTRA TESTIFICITY! EDITED MOAR TESTING
+- title: Test 2
+  description: SEED SEED SEED !!! MOAR! EDIT EdIT
+- title: New idea
+  description: Refactoring? Creo que si! Aaand I can edit it!
+- title: Add this
+  description: add?

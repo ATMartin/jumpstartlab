@@ -4,28 +4,24 @@ class IdeaBoxApp < Sinatra::Base
 # Sinatra settings for Nitrous.IO
   set :bind, '0.0.0.0'
   set :port, 3000
-   
+  register Sinatra::Reloader
 #------------------------- HELPERS
 
 #------------------------- ROUTING
 	set :method_override, true
 
   get '/' do 
-    erb :index, locals: {ideas: Idea.all} 
+    erb :index, locals: {ideas: Idea.all, idea: Idea.new}
   end
 
   post '/' do
-    idea = Idea.new(params['idea_title'], params['idea_description'])
+    idea = Idea.new(params[:idea])
     idea.save
     redirect '/'
   end
 
 	put '/:id' do |id|
-		data = { 
-			:title => params['idea_title'],
-			:description => params['idea_description']
-		}
-		Idea.update(id.to_i, data)
+		Idea.update(id.to_i, params[:idea])
 		redirect '/'
 	end
 	

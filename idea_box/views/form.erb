@@ -1,0 +1,9 @@
+<form action='/<%= id if mode == 'edit' %>' method='POST'>
+	<p><% if mode == 'edit' %>Edit this Idea:<% else %>Your Idea:<% end %></p>
+	<input type='text' name='idea[title]' value="<%= idea.title %>" /><br />
+	<textarea name='idea[description]'><%= idea.description %></textarea><br />
+	<% if mode == "edit" %>
+		<input type="hidden" name="_method" value="PUT" />
+	<% end %>
+	<input type='submit' />
+</form>
