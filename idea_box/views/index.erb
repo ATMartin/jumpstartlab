@@ -11,10 +11,14 @@
   <br />
   <h3>Existing Ideas:</h3>
   <ul>
-    <% ideas.each do |idea| %>
+    <% ideas.each_with_index do |idea, idx| %>
       <li>
         <%= idea.title %><br/>
         <%= idea.description %>
+				<form action="/<%= idx %>" method="POST">
+					<input type="hidden" name="_method" value="DELETE">
+					<input type="submit" value="delete" />
+				</form>
      </li>
     <% end %>
   </ul>
