@@ -1,0 +1,17 @@
+  <h1> Welcome to Idea Box! </h1>
+  <%= erb :form, locals: {idea: idea, mode: 'new'} %>
+	<br />
+  <h3>Existing Ideas:</h3>
+  <ul>
+    <% ideas.each_with_index do |idea, idx| %>
+      <li>
+        <%= idea.title %><br/>
+        <%= idea.description %>
+				<a href="/<%= idx %>/edit">Edit</a>
+				<form action="/<%= idx %>" method="POST">
+					<input type="hidden" name="_method" value="DELETE">
+					<input type="submit" value="delete" />
+				</form>
+     </li>
+    <% end %>
+  </ul>
