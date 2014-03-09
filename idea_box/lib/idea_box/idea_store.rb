@@ -1,9 +1,16 @@
 require 'yaml/store'
 
-class Idea_Store
+class IdeaStore
 	
 	def self.database
-		Idea.database
+		@database ||= YAML::Store.new('db/ideabox')
+	end
+	
+	def self.create(data)
+		database.transaction do |db|
+			db['ideas'] ||= []
+			db['ideas'] << data
+		end
 	end
 
 	def self.raw
@@ -13,17 +20,17 @@ class Idea_Store
 	end
 
 	def self.all
-		raw.map {| data| new(data) }
+		raw.map {|data| Idea.new(data) }
 	end
 
 	def self.find_raw(id)
-		databse.transation do |db|
+		database.transaction do |db|
 			db['ideas'].at(id)	
 		end
 	end
 
 	def self.find(id)
-		new(Idea.find_raw(id))
+		Idea.new(IdeaStore.find_raw(id))
 	end
 	
 	def self.update(id, data)

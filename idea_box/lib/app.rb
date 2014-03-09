@@ -1,4 +1,4 @@
-require './idea.rb'
+require 'idea_box'
 
 class IdeaBoxApp < Sinatra::Base
 # Sinatra settings for Nitrous.IO
@@ -9,33 +9,30 @@ class IdeaBoxApp < Sinatra::Base
 
 #------------------------- ROUTING
 	set :method_override, true
+	set :root, 'lib/app'
 
   get '/' do 
-    erb :index, locals: {ideas: Idea.all, idea: Idea.new}
+    erb :index, locals: {ideas: IdeaStore.all, idea: Idea.new}
   end
 
   post '/' do
-    idea = Idea.new(params[:idea])
-    idea.save
-    redirect '/'
+    IdeaStore.create(params[:idea])
+		redirect '/'
   end
 
 	put '/:id' do |id|
-		Idea.update(id.to_i, params[:idea])
+		IdeaStore.update(id.to_i, params[:idea])
 		redirect '/'
 	end
 	
 	get '/:id/edit' do |id|
-		idea = Idea.find(id.to_i)
+		idea = IdeaStore.find(id.to_i)
 		erb :edit, locals: {id: id, idea: idea}
 	end
 	
 	delete '/:id' do |id|
-		Idea.delete(id)
-		# 2. Check for duplicate entries?
-		# 3. Return "true" if removed or "false" for an error. 
+		IdeaStore.delete(id)
 		redirect '/'	
-		"DELETING this idea!"
 	end
 
   not_found do
